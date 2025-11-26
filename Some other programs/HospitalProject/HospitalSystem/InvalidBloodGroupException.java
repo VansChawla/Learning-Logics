@@ -1,0 +1,9 @@
+package HospitalSystem;
+
+public class InvalidBloodGroupException extends Exception{
+    
+    public InvalidBloodGroupException(String message){
+
+        super(message);
+    }
+}
