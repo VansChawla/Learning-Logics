@@ -17,16 +17,19 @@ public class PatientRegistration {
 
         boolean isValid = false;
 
-        String[] validGroups = {"A+VE", "A-VE", "B+VE", "B-VE", "O+VE", "O-VE", "AB+VE", "AB-VE"};
+        String[] validGroups = { "A+VE", "A-VE", "B+VE", "B-VE", "O+VE", "O-VE", "AB+VE", "AB-VE" };
 
-        while(!isValid){
-            try{
+        String[] donorArray = new String[10];
+        int donorCount = 0;
+
+        while (!isValid) {
+            try {
                 System.out.print("Enter Blood Group (e.g., A+VE, O-VE): ");
                 String inputGroup = sc.nextLine().toUpperCase();
 
                 boolean found = Arrays.asList(validGroups).contains(inputGroup);
 
-                if(!found){
+                if (!found) {
 
                     throw new InvalidBloodGroupException("You have entered wrong blood group. Enter valid data");
                 }
@@ -37,14 +40,38 @@ public class PatientRegistration {
                 char choice = sc.next().charAt(0);
 
                 if (choice == 'y' || choice == 'Y') {
-                    System.out.println("Registered as Blood Donor. Thank you");
+
+                    if (donorCount < 10) {
+
+                        String donorRecord = "Name: " + name + " | Group: " + inputGroup + " | Phone: " + phone;
+
+                        donorArray[donorCount] = donorRecord;
+
+                        donorCount++;
+
+                        System.out.println("Registered as Blood Donor. Saved to Array Memory.");
+
+                    } else {
+                        System.out.println("Error: Donor Database is Full!");
+                    }
+
                 } else {
                     System.out.println("Thank You");
                 }
 
             } catch (InvalidBloodGroupException e) {
-                
+
                 System.out.println("Error: " + e.getMessage());
+            }
+        }
+
+        // --- Verify Data ---
+        System.out.println("\n--- Current List of Donors in Array ---");
+        if (donorCount == 0) {
+            System.out.println("No donors registered.");
+        } else {
+            for (int i = 0; i < donorCount; i++) {
+                System.out.println((i + 1) + ". " + donorArray[i]);
             }
         }
     }
