@@ -1,26 +1,21 @@
 class RemoveNthFromTheEndinLL {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        //Calculate Size of LL
-        int size = 0;
-        ListNode temp = head;
-        while(temp!=null){
-            temp = temp.next;
-            size++;
-        }
-        if(n==size){
-            head = head.next;
-            return head;
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode firstPtr = dummy;
+        ListNode secondPtr = dummy;
+
+        for (int i = 0; i < n; i++) { // Move secondPtr n spaces ahead
+            secondPtr = secondPtr.next;
         }
 
-        //size-n
-        int i=1;
-        int iToFind=size-n;
-        ListNode prev = head;
-        while(i<iToFind){
-            prev=prev.next;
-            i++;
+        while (secondPtr.next != null) { // Move both now, untill the next of secondPtr is null
+            firstPtr = firstPtr.next;
+            secondPtr = secondPtr.next;
         }
-        prev.next = prev.next.next;
-        return head;
+
+        firstPtr.next = firstPtr.next.next; // Now we can remove the node next of firstPtr
+        return dummy.next;
     }
 }
