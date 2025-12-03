@@ -5,7 +5,7 @@ public class CircularQueue {
     int size;
     int capacity;
 
-    public MyCircularQueue(int k) {
+    public CircularQueue(int k) {
             data = new int[k];
             front = 0;
             rear = -1;
@@ -49,4 +49,5 @@ public class CircularQueue {
     public boolean isFull() {
         return size == capacity;
     }
+    
 }
