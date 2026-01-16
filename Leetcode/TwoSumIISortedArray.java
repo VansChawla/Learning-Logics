@@ -1,6 +1,6 @@
 class TwoSumIISortedArray {
     public int[] twoSum(int[] numbers, int target) {
-        //OPTIMIZED
+        //OPTIMIZED - Two Pointer Approach
         int left = 0; 
         int right = numbers.length-1;
 
