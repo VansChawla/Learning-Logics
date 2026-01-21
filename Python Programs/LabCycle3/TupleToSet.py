@@ -1,13 +1,13 @@
 #Create a function that takes two tuples of integers, converts them to sets, finds their symmetric difference, then converts back to a sorted tuple. Raise a custom ValueError if any element is non-integer. Test with (1,2,3) and (3,4,5). 
 
-class NotIntError(ValurError):
+class NotIntError(ValueError):
     pass
 
 def sym_diff_tuples(t1, t2):
 
     for item in t1+t2:
         if not isinstance(item, int):
-            raise NonIntegerError(f"Invalid element found: '{item}'. All elements must be integers.")
+            raise NotIntError(f"Invalid element found: '{item}'. All elements must be integers.")
 
     set1 = set(t1)
     set2 = set(t2)
@@ -23,8 +23,14 @@ if __name__ == "__main__":
         tuple_a = (1, 2, 3)
         tuple_b = (3, 4, 5)
 
-        output = symmetric_diff_tuples(tuple_a, tuple_b)
-        print(f"Symmetric Difference (Sorted Tuple): {output}")
+        tuple_c = (1, 2, 3)
+        tuple_d = (3, 4, "vansh")
 
-    except NonIntegerError as e:
+        output1 = sym_diff_tuples(tuple_a, tuple_b)
+        print(f"Symmetric Difference (Sorted Tuple): {output1}")
+        
+        output2 = sym_diff_tuples(tuple_c, tuple_d)
+        print(f"Symmetric Difference (Sorted Tuple): {output2}")
+
+    except NotIntError as e:
         print(e)
