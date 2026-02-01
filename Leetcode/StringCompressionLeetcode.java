@@ -1,4 +1,4 @@
-public class String {
+public class StringCompressionLeetcode {
     // LOGICALLY CORRECT, BUT FAILS LEETCODE CONSTRAINTS
     public int compress(char[] chars) {
         StringBuilder sb = new StringBuilder();
