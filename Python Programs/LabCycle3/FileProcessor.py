@@ -64,7 +64,7 @@ if __name__ == "__main__":
         f.write("{'id': 1, 'name': 'Alice'}\n")    # Valid
         f.write("{'name': 'Bob'}\n")                # Missing 'id' (KeyError)
         f.write("[1, 2, 3]\n")                      # Not a dict (Ignored)
-        f.write("{'id': 2, 'name': 'Charlie\n")     # Malformed/Incomplete (SyntaxError)
+        f.write("{'id': 2, 'name': 'Charlie'}\n")     # Malformed/Incomplete (SyntaxError)
         f.write("{'id': 3, 'name': 'Dave'}\n")      # Valid
 
     # 2. Run Processor

@@ -1,0 +1,5 @@
+{'id': 1, 'name': 'Alice'}
+{'name': 'Bob'}
+[1, 2, 3]
+{'id': 2, 'name': 'Charlie'}
+{'id': 3, 'name': 'Dave'}

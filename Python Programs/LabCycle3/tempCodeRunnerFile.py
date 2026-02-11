@@ -1,6 +1,5 @@
 import time
 import atexit
-import types
 
 class Timer:
     # Class-level list to store logs across all instances
@@ -10,11 +9,6 @@ class Timer:
         self.func = func
         # Register the save_logs method to run when the script ends
         atexit.register(self.save_logs)
-
-    def __get__(self, instance, owner):
-        if instance is None:
-            return self
-        return types.MethodType(self, instance)
 
     def __call__(self, *args, **kwargs):
         start_time = time.time()

@@ -1,0 +1,2 @@
+Function 'multiply' executed in 0.000000 seconds.
+Function 'multiply' executed in 0.000000 seconds.
