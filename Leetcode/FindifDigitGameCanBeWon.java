@@ -1,4 +1,4 @@
-public class FindifDigitGameCanBeWon {
+public class FindIfDigitGameCanBeWon {
     public boolean canAliceWin(int[] nums) {
         int sumSingle = 0;
         int sumDouble = 0;
