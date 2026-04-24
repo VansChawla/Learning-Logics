@@ -19,6 +19,7 @@ public class RemoveNodesFromLL {
         return prev;
     }
 
+    //--Brute Force (Not Optimized)--//
     public ListNode removeNodes(ListNode head) {
         Stack<Integer> stack = new Stack<>();
         while (head != null) {
@@ -39,5 +40,26 @@ public class RemoveNodesFromLL {
         }
 
         return reverseList(result.next);
+    }
+    
+    //--Optimized Approach--//
+    public ListNode removeNodes(ListNode head) {
+
+        head = reverseList(head);   
+
+        int max = head.val;
+        ListNode curr = head;
+
+        while(curr != null && curr.next != null){
+            if(curr.next.val < max){
+                curr.next = curr.next.next;
+            } 
+            else{
+                curr = curr.next;
+                max = curr.val;
+            }    
+        }
+
+        return reverseList(head);
     }
 }
