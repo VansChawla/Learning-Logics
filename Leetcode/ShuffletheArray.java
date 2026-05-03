@@ -1,5 +1,14 @@
 public class ShuffletheArray {
     public int[] shuffle(int[] nums, int n) {
+        //optimized solution
+        int[] array=new int[2*n];
+        for (int i=0;i<n;i++){
+            array[2*i]=nums[i];
+            array[2*i+1]=nums[n+i];
+        }
+        return array;
+
+        //brute force solution
         int[] result = new int[2 * n];
 
         int l = 0, m = n;
@@ -12,7 +21,6 @@ public class ShuffletheArray {
                 m++;
             }
         }
-
         return result;
     }
 }
