@@ -2,6 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PascalsTriangle {
+    //New Solution - Striver
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> answer = new ArrayList<>();
+        for(int row=1; row<=numRows; row++){
+            Integer ele = 1;
+            List<Integer> ansRow = new ArrayList<>();
+            ansRow.add(1);
+            for(int col=1; col<row; col++){
+                ele *= (row-col);
+                ele /= col;
+                ansRow.add(ele);
+            }
+            answer.add(ansRow);
+        }
+        return answer;
+    }
+
+    //Old Solution
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> triangle = new ArrayList<List<Integer>>();
         if (numRows <= 0) {
