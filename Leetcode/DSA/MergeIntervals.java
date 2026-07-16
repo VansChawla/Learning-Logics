@@ -1,4 +1,36 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 class MergeIntervals {
+
+    // Time Complexity: O(nlogn) + O(n) = O(nlogn), Striver Solution
+    public int[][] merge(int[][] arr) {
+        if (arr == null || arr.length <= 1)
+            return arr;
+
+        //Sort intervals based on the start element
+        Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+
+        int[][] tempAns = new int[arr.length][2];
+        int index = 0;
+
+        tempAns[0] = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i][0] > tempAns[index][1]) {
+                index++;
+                tempAns[index] = arr[i];
+            } else {
+                tempAns[index][1] = Math.max(tempAns[index][1], arr[i][1]);
+            }
+        }
+
+        return Arrays.copyOf(tempAns, index + 1);
+    }
+
+    
     public int[][] merge(int[][] intervals) {
         if(intervals.length <= 1)
             return intervals;
