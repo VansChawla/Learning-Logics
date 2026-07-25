@@ -1,4 +1,28 @@
 class RemoveNthFromTheEndinLL {
+
+    //Brute force approach
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode curr = head;
+        int size = 0;
+        while(curr != null){
+            curr = curr.next;
+            size++;
+        }
+
+        //Edge case: If removing the head node
+        if (size == n) return head.next;
+        
+        int i=0;
+        ListNode node = head;
+        while(i < size-n-1){
+            node = node.next;
+            i++;
+        }
+        node.next = node.next.next;
+        return head;
+    }
+
+    // Two pointer approach
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
