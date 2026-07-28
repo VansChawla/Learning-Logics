@@ -1,8 +1,69 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CombinationSum {
 
+    //Striver's approach
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        findAllCombSums(candidates, 0, ans, new ArrayList<>(), target);
+        return ans;
+    }
+
+    private void findAllCombSums(int[] arr, int i, List<List<Integer>> ans, List<Integer> currSum, int target){
+        if(i == arr.length){
+            if(target == 0){
+                ans.add(new ArrayList<>(currSum));
+            }
+            return;
+        }
+
+        if(arr[i] <= target){
+            currSum.add(arr[i]);
+            findAllCombSums(arr, i, ans, currSum, target-arr[i]);
+            currSum.remove(currSum.size()-1);
+        }
+        findAllCombSums(arr, i+1, ans, currSum, target);
+    }
+
+    // This method calls the recursive helper for three times: Inclusion of single, Inclusion of multiple and 
+    // Exclusion of the current element - Shradha's approach, This approach uses HashSet to avoid duplicates
+    // This approach is not optimal as it uses extra space for HashSet and also calls the recursive function
+    // three times for each element, which increases the time complexity.
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Set<List<Integer>> set = new HashSet<>();
+        findAllCombSums(candidates, 0, ans, new ArrayList<>(), target, set);
+        return ans;
+    }
+
+    private void findAllCombSums(int[] arr, int i, List<List<Integer>> ans, List<Integer> currSum, int target, Set<List<Integer>> set){
+        if(i == arr.length || target < 0) return;
+
+        if(target == 0){
+            if(!set.contains(currSum)){
+                set.add(new ArrayList<>(currSum));
+                ans.add(new ArrayList<>(currSum));
+                return;
+            }
+        }
+
+        //Inclusion Single
+        currSum.add(arr[i]);
+        findAllCombSums(arr, i+1, ans, currSum, target-arr[i], set);
+
+        //Inclusion multiple
+        findAllCombSums(arr, i, ans, currSum, target-arr[i], set);
+        currSum.remove(currSum.size()-1);
+
+        //Exclusion
+        findAllCombSums(arr, i+1, ans, currSum, target, set);
+    }
+
+
+    // 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> result = new ArrayList<>();
         // Start backtracking with an empty list, full target remaining, and starting at index 0
