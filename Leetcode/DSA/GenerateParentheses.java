@@ -2,6 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 class GenerateParentheses {
+    // This method generates all combinations of well-formed parentheses for a given number n.
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<>();
+        generate(n, 0, 0, "", ans);
+        return ans;
+    }
+
+    private void generate(int n, int l, int r, String s, List<String> ans) {
+        if(r == n){
+            ans.add(s);
+            return;
+        }
+        if(l < n) generate(n, l+1, r, s+"(", ans);
+        if(r < l) generate(n, l, r+1, s+")", ans);
+    }
+
+    // Alternative implementation using backtracking
     public List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
         // Start the recursion with an empty string and 0 brackets used
