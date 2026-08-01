@@ -1,4 +1,4 @@
-public class ImplementStackUsingArray {
+public class StackUsingArray {
     class myStack {
     int top;
     int st[];
