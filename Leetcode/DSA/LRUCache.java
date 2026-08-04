@@ -1,17 +1,4 @@
-class Node{
-    int key;
-    int value;
-
-    Node next;
-    Node prev;
-
-    Node(int key, int value){
-        this.key=key;
-        this.value=value;
-    }
-}
-
-public class LRUCache {
+class LRUCache {
     HashMap<Integer, Node> cache = new HashMap<>();
     int capacity;
     Node head;
@@ -65,5 +52,17 @@ public class LRUCache {
         node.prev = head;        // Link New Node backward to dummy Head
         node.next = temp;        // Link New Node forward to old first node
         temp.prev = node;        // Link old first node backward to New Node
+    }
+
+    class Node{
+        int key;
+        int value;
+        Node prev;
+        Node next;
+
+        public Node(int key, int value){
+            this.key = key;
+            this.value = value;
+        }
     }
 }
