@@ -14,7 +14,7 @@ class TreeNode {
     }
 }
 
-class BinaryTreeRightSideView {
+class RightViewofBT {
 
     // Recursive approach to get the right side view of a binary tree
     public List<Integer> rightSideView(TreeNode root) {
