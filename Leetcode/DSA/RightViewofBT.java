@@ -1,22 +1,13 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-// Definition for a binary tree node provided by LeetCode
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+import javax.swing.tree.TreeNode;
 
 class RightViewofBT {
 
-    // Recursive approach to get the right side view of a binary tree
+    // Recursive approach
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         rightView(root, result, 0);
@@ -32,30 +23,31 @@ class RightViewofBT {
         rightView(curr.left, result, currDepth + 1);
     }    
 
-    // Iterative approach to get the right side view of a binary tree
+    // Iterative approach
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if (root == null) return result;
-        
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size(); // Number of nodes at the current level
-            int lastValue = 0; // Store the last node's value of the level
-            
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode node = queue.poll();
-                lastValue = node.val; // Update lastValue with the current node's value
-                
-                // Add child nodes to queue for next level processing
-                if (node.left != null) queue.offer(node.left);
-                if (node.right != null) queue.offer(node.right);
-            }
-            
-            result.add(lastValue); // Add the last node's value of this level
-        }
-        
-        return result;
+        ArrayList<Integer> ans = new ArrayList<>();
+           if(root == null) return ans;
+           
+           Queue<TreeNode> q = new LinkedList<>();
+           q.add(root);
+           
+           while(!q.isEmpty()){
+               ans.add(q.peek().val);
+               int n = q.size();
+               
+               while(n != 0){
+                   TreeNode temp = q.poll();
+                        
+                   if(temp.right != null)
+                        q.add(temp.right);
+
+                    if(temp.left != null)
+                        q.add(temp.left);
+                        
+                    n--;
+               }
+           }
+           
+        return ans;
     }
 }
