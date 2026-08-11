@@ -2,6 +2,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindIfPathExistsGraph {
+
+    // BFS approach
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        if(source == destination) return true;
+        
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for(int i=0; i<edges.length; i++){
+            int a = edges[i][0], b = edges[i][1];
+            adj.get(a).add(b);
+            adj.get(b).add(a);
+        }
+
+        boolean[] vis = new boolean[n];
+        bfs(source, vis, adj);
+
+        return vis[destination];
+    }
+
+    private void bfs(int source, boolean[] vis, List<List<Integer>> adj){
+        Queue<Integer> q = new LinkedList<>();
+        vis[source] = true;
+        q.add(source);
+
+        while(q.size()>0){
+            int front = q.remove();
+            for(int key : adj.get(front)){
+                if(!vis[key]){
+                    vis[key] = true;
+                    q.add(key);
+                }
+            }
+        }
+    }
+
+    // DFS approach
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         List<List<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < n; i++) {
