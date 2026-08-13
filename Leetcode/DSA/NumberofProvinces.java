@@ -5,12 +5,27 @@ class NumberofProvinces {
         boolean[] vis = new boolean[n];
         for(int i=0; i<n; i++){
             if(!vis[i]){
-                bfs(i, adj, vis);
+                // bfs(i, adj, vis);
+                dfs(i, adj, vis);
                 count++;
             }
         }
         return count;
     }
+
+    //DFS
+    private void dfs(int i, int[][] adj, boolean[] vis){
+        int n = adj.length;
+        vis[i] = true;
+        for(int j=0; j<n; j++){
+            if(adj[i][j] == 1 && !vis[j]){
+                dfs(j, adj, vis);
+                vis[j] = true;
+            }
+        }
+    }
+
+    //BFS
     private void bfs(int i, int[][] adj, boolean[] vis){
         int n = adj.length;
         vis[i] = true;
