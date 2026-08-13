@@ -2,7 +2,8 @@ class KeysNRooms {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         int n = rooms.size();
         boolean[] vis = new boolean[n];
-        bfs(0, vis, rooms);
+        // bfs(0, vis, rooms);
+        dfs(0, vis, rooms);
 
         boolean ans = false;
         for(int i=0; i<n; i++){
@@ -10,6 +11,16 @@ class KeysNRooms {
                 return false;
         }
         return true;
+    }
+
+    private void dfs(int i, boolean[] vis, List<List<Integer>> rooms){
+        vis[i] = true;
+
+        for(int key : rooms.get(i)){
+            if(!vis[key]){
+                dfs(key, vis, rooms);
+            }
+        }
     }
 
     private void bfs(int i, boolean[] vis, List<List<Integer>> rooms){

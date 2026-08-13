@@ -20,7 +20,6 @@ class NumberofProvinces {
         for(int j=0; j<n; j++){
             if(adj[i][j] == 1 && !vis[j]){
                 dfs(j, adj, vis);
-                vis[j] = true;
             }
         }
     }
