@@ -11,9 +11,15 @@ class RowWithMaximumOnes {
             }
             if(oneCount > maxCount && oneCount != maxCount){
                 ans[0] = i;
+                maxCount = oneCount;
+                ans[1] = maxCount;
             }
-            maxCount = Math.max(maxCount, oneCount);
-            ans[1] = maxCount;
+            // OR
+            // if(oneCount > maxCount && oneCount != maxCount){
+            //     ans[0] = i;
+            // }
+            // maxCount = Math.max(maxCount, oneCount);
+            // ans[1] = maxCount;
         }
 
         return ans;
