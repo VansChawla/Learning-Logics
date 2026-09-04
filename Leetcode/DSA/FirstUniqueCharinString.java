@@ -1,6 +1,24 @@
-import java.util.HashMap;
-
 public class FirstUniqueCharinString {
+    // Manual Map
+    public int firstUniqChar(String s) {
+        int[] counter = new int[26];
+
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            counter[ch - 'a']++;
+        }
+
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if(counter[ch - 'a'] == 1){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // HashMap
     public int firstUniqChar(String s) {
 
         char st[] = s.toCharArray();
