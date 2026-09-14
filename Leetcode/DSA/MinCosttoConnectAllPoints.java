@@ -1,4 +1,76 @@
 public class MinCosttoConnectAllPoints {
+    
+    // Kruskal's Algorithm
+    static int[] parent;
+    static int[] size;
+    public int find(int a){
+        if(parent[a] == a) return a;
+        return parent[a] = find(parent[a]);
+    }
+
+    public void union(int a, int b){
+        a = find(a);
+        b = find(b);
+        if(a!=b){
+            if(size[a] > size[b]){
+                parent[b] = a;
+                size[a] += size[b];
+            } else {
+                parent[a] = b;
+                size[b] += size[a];
+            }
+        }
+    }
+
+    class Edge implements Comparable<Edge>{
+        int u;
+        int v;
+        int dist;
+        public Edge(int u, int v, int dist){
+            this.u = u;
+            this.v = v;
+            this.dist = dist;
+        }
+        @Override
+        public int compareTo(Edge e){
+            if(this.dist == e.dist) return this.u - e.u;
+            return this.dist - e.dist;
+        }
+    }
+
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        parent = new int[n];
+        size = new int[n];
+        for(int i=0; i<n; i++){
+            parent[i] = i;
+            size[i] = 1;
+        }
+
+        List<Edge> list = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                int x1 = points[i][0], y1 = points[i][1];
+                int x2 = points[j][0], y2 = points[j][1];
+                int dist = Math.abs(x1-x2) + Math.abs(y1-y2);
+                list.add(new Edge(i, j, dist));
+            }
+        }
+        Collections.sort(list);
+        int cost = 0;
+        for(int i=0; i<list.size(); i++){
+            Edge top = list.get(i);
+            int u = top.u, v = top.v, dist = top.dist;
+            if(find(u) != find(v)){
+                cost += dist;
+                union(u, v);
+            }
+        }
+
+        return cost;
+    }
+
+    // Prim's Algorithm
     public int minCostConnectPoints(int[][] points) {
         int n = points.length;
 
