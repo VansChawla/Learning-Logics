@@ -1,6 +1,35 @@
 import java.util.*;
 
 class Solution {
+
+    // Using HashMap and Queue
+    public String firstNonRepeating(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        Queue<Character> q = new LinkedList<>();
+        
+        for(char ch : s.toCharArray()){
+            map.put(ch, map.getOrDefault(ch, 0)+1);
+            q.add(ch);
+            
+            while(!q.isEmpty()){
+                if(map.get(q.peek()) > 1){ //Repeating ch
+                    q.remove();
+                }
+                else{ //Non Repeating ch
+                    sb.append(q.peek());
+                    break;
+                }
+            }
+            
+            if(q.isEmpty())
+                sb.append("#");
+        }
+        
+        return sb.toString();
+    }
+
+    // Using LinkedHashSet and HashSet
     public String firstNonRepeating(String s) {
         StringBuilder sb = new StringBuilder();
         
