@@ -1,4 +1,4 @@
-class SummaryRanges {
+class SummaryRangesc {
     public List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<>();
         
