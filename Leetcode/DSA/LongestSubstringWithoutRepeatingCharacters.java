@@ -1,8 +1,26 @@
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class LongestSubstringWithoutRepeatingCharacters {
-    // New Solution - Sliding Window Approach
+    // New Solution - Sliding Window Approach - HashMap
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int len = 0;
+        int l = 0;
+        for(int r=0; r<s.length(); r++){
+            char ch = s.charAt(r);
+            while(map.containsKey(ch)){
+                map.remove(s.charAt(l));
+                l++;
+            }
+            map.put(ch, map.getOrDefault(ch, 0) +1);
+            len = Math.max(len, r-l+1);
+        }
+        return len;
+    }
+    
+    // New Solution - Sliding Window Approach - HashSet
     public int lengthOfLongestSubstring(String s) {
         HashSet<Character> set = new HashSet<>();
 
