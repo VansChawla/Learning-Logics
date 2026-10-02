@@ -1,4 +1,39 @@
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 class SlidingWindowMax {
+    // Sliding Window with PriorityQueue with Pair class
+    class Pair{
+        int val;
+        int i;
+        public Pair(int val, int i){
+            this.val = val;
+            this.i = i;
+        }
+    }
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int ans[] = new int[n-k+1];
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Integer.compare(b.val, a.val));
+
+        int l = 0;
+        for(int r=0; r<n; r++){
+            pq.add(new Pair(nums[r], r));
+
+            if(r-l+1 == k){
+                while(pq.peek().i < l){
+                    pq.poll();
+                }
+                ans[l] = pq.peek().val;
+                l++;
+            }
+        }
+
+        return ans;
+    }
+
+    // Another approach using PriorityQueue with Pair class
     class Pair {
         int value;
         int index;
