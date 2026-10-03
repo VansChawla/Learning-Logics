@@ -10,6 +10,8 @@ class LongestRepeatingCharacterReplacement {
             counter[ch - 'A']++;
             maxFreq = Math.max(maxFreq, counter[ch - 'A']);
 
+            // currTotalLen minus max char freq = kitne changes karne par maxlen milegi
+            // agr vo nahi hai then shift left pointer  
             if((r-l+1) - maxFreq > k){
                 counter[s.charAt(l) - 'A']--;
                 l++;
