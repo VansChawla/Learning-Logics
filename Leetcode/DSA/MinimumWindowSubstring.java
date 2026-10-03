@@ -1,4 +1,44 @@
 class MinimumWindowSubstring {
+    // Sliding Window Approach
+    public String minWindow(String s, String t) {
+        if(s.length() < t.length()) return "";
+        
+        Map<Character, Integer> tmap = new HashMap<>();
+        for(char ch : t.toCharArray()){
+            tmap.put(ch, tmap.getOrDefault(ch, 0) +1);
+        }
+        int need = tmap.size();
+
+        int l = 0;
+        int min = Integer.MAX_VALUE;
+        int have = 0;
+        int start = 0;
+        Map<Character, Integer> smap = new HashMap<>();
+        for(int r=0; r<s.length(); r++){
+            char ch = s.charAt(r);
+
+            smap.put(ch, smap.getOrDefault(ch, 0) +1);
+           
+            if(tmap.containsKey(ch) && tmap.get(ch) == smap.get(ch)) have++;
+
+            while(need == have){
+                if(r-l+1 < min){
+                    min = r-l+1;
+                    start = l;
+                }
+
+                char leftChar = s.charAt(l);
+                smap.put(leftChar, smap.get(leftChar)-1);
+                if(tmap.containsKey(leftChar) && tmap.get(leftChar) > smap.get(leftChar))
+                    have--;
+                l++;
+            }
+        }
+
+        return min == Integer.MAX_VALUE ? "" : s.substring(start, start + min);
+    }
+
+    // Sliding Window Another Approach
     public String minWindow(String s, String t) {
         if(s.length() < t.length()) return "";
 
