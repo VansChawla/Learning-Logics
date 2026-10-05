@@ -19,7 +19,7 @@ class MinimumWindowSubstring {
 
             smap.put(ch, smap.getOrDefault(ch, 0) +1);
            
-            if(tmap.containsKey(ch) && tmap.get(ch) == smap.get(ch)) have++;
+            if(tmap.containsKey(ch) && tmap.get(ch).equals(smap.get(ch))) have++;
 
             while(need == have){
                 if(r-l+1 < min){
@@ -29,8 +29,7 @@ class MinimumWindowSubstring {
 
                 char leftChar = s.charAt(l);
                 smap.put(leftChar, smap.get(leftChar)-1);
-                if(tmap.containsKey(leftChar) && tmap.get(leftChar) > smap.get(leftChar))
-                    have--;
+                if(tmap.containsKey(leftChar) && tmap.get(leftChar) > smap.get(leftChar)) have--;
                 l++;
             }
         }
