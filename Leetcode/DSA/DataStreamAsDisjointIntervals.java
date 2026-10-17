@@ -1,4 +1,56 @@
 class DataStreamAsDisjointIntervals {
+    // Approach using TreeSet
+    TreeSet<Integer> list;
+
+    public SummaryRanges() {
+        list = new TreeSet<>();
+    }
+    
+    public void addNum(int value) {
+        list.add(value);
+    }
+    
+    public int[][] getIntervals() {
+        if(list.size() == 0){
+            return new int[][] {};
+        }
+
+        Integer left = null;
+        Integer right = null;
+
+        List<int[]> res = new ArrayList<>();
+        for(Integer val : list){
+            if(left == null && right == null){
+                left = val;
+                right = val;
+            }
+            else if(val == right + 1){
+                right = val;
+            }
+            else {
+                res.add(new int[] {
+                    left, right
+                });
+                
+                // Shifting left & right for the next interval
+                left = val;
+                right = val;
+            }
+
+        }
+        res.add(new int[] {
+            left, right
+        });
+
+        int[][] ans = new int[res.size()][2];
+        for(int i=0; i<res.size(); i++){
+            ans[i] = res.get(i);
+        }
+
+        return ans;
+    }
+
+    // Approach using List
     List<Integer> list;
     public SummaryRanges() {
         list = new ArrayList<>();
